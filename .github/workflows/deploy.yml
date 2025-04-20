@@ -1,14 +1,22 @@
-name: Deploy to GitHub Pages
+name: Deploy Vue to GitHub Pages
 on:
   push:
-    branches: ["main"]  # 监听 main 分支的推送
+    branches: ["main"]
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm install && npm run build
-      - uses: peaceiris/actions-gh-pages@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build  # 会自动读取 vite.config.js 中的 base
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./dist  # 确保指向构建输出的 dist 目录
