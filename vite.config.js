@@ -5,7 +5,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 export default defineConfig({
   base: '/vuedemo/', // 重点：替换为你的仓库名（前后有斜杠）
-  plugins: [
+  plugins: [//fuckyou
     vue(),
     vueDevTools(),
   ],
