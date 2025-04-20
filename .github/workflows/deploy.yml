@@ -9,14 +9,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run build  # 会自动读取 vite.config.js 中的 base
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build      # 依赖 package.json 中的脚本
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist  # 确保指向构建输出的 dist 目录
+          publish_dir: ./dist  # Vite 默认输出目录
